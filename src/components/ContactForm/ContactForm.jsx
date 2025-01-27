@@ -1,9 +1,9 @@
 import { useDispatch } from "react-redux";
-import { addContact } from "../../redux/contactsSlice";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useId } from "react";
 import * as Yup from "yup";
 import css from "../ContactForm/ContactForm.module.css";
+import { addContact } from "../../redux/contactsOps";
 
 export default function ContactForm() {
   const dispatch = useDispatch();
@@ -36,28 +36,30 @@ export default function ContactForm() {
   });
 
   return (
-    <Formik
-      initialValues={initialValues}
-      onSubmit={handleSubmit}
-      validationSchema={ContactSchema}
-    >
-      <Form className={css.form}>
-        <label htmlFor={nameId} className={css.label}>
-          Name
-        </label>
-        <Field type="text" name="name" className={css.input} id={nameId} />
-        <ErrorMessage name="name" component="div" className={css.error} />
+    <div className={css.container}>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={handleSubmit}
+        validationSchema={ContactSchema}
+      >
+        <Form className={css.form}>
+          <label htmlFor={nameId} className={css.label}>
+            Name
+          </label>
+          <Field type="text" name="name" className={css.input} id={nameId} />
+          <ErrorMessage name="name" component="div" className={css.error} />
 
-        <label htmlFor={numberId} className={css.label}>
-          Number
-        </label>
-        <Field type="tel" name="number" className={css.input} id={numberId} />
-        <ErrorMessage name="number" component="div" className={css.error} />
+          <label htmlFor={numberId} className={css.label}>
+            Number
+          </label>
+          <Field type="tel" name="number" className={css.input} id={numberId} />
+          <ErrorMessage name="number" component="div" className={css.error} />
 
-        <button type="submit" className={css.btn}>
-          Add contact
-        </button>
-      </Form>
-    </Formik>
+          <button type="submit" className={css.btn}>
+            Add contact
+          </button>
+        </Form>
+      </Formik>
+    </div>
   );
 }
